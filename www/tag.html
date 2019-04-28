@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ruuvi sensors</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Tag</h2>
+  <div class="form-group">
+  <form action="/setTagName" method="get">
+	<label for="usr">New name:</label>
+	<input type="text" class="form-control" id="name" name="newName" value="__TAG_NAME__">
+	<input type="hidden" id="custId" name="id" value="__ID__">
+	<button type="submit" id="setName" class="btn btn-primary">Submit</button>
+  </form>
+  <p>
+  <form action="/deleteTag" method="get">
+	<input type="hidden" id="custId" name="id" value="__ID__">
+	<button type="submit" id="delete" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+ 
+</div>
+
+
+</body>
+</html>

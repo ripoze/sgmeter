@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<script>
+    const getData = () => {
+        fetch('./data')
+            .then((res) => {
+                res.json()
+                    .then(function (data) {
+                        console.log(data);
+                        document.getElementById("lampo").innerHTML = data.data.lampo + '°C';
+                        document.getElementById("kulma").innerHTML = Number(data.data.kulma).toFixed(1) + '°';
+                        document.getElementById("sg").innerHTML = Number(data.sg).toFixed(3);
+                        document.getElementById("og").innerHTML = ((Number(data.calibration[0].og) - Number(data.sg)) * 131.25).toFixed(2) + "%";
+                    });
+            })
+    }
+    setInterval(() => getData(), 500)
+</script>
+<html lang="en">
+
+<head>
+    <title>Ruuvi anturit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  -->
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SG meter</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container text-center">
+        <div class="form-group">
+
+            <div class="col-xs-9 text-center">
+                <font size=4 face="verdana">
+
+                    Lämpö:
+                    <span id="lampo"></span>
+                    <br>Kulma:
+                    <span id="kulma"></span>
+                    <br>SG:
+                    <span id="sg"></span>
+                    <br>ABV:
+                    <span id="og"></span>
+
+                </font>
+            </div>
+            <div class="col-xs-3 text-center">
+                <img src="beer.svg">
+                <a href="/kalibrointi.html"><button type="button"
+                        class="btn btn-success btn-block">Kalibrointi</button></a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="col-xs-12">
+            <font size=1>Gateway LAN ip: __IP__</font>
+        </div>
+    </footer>
+</body>
+
+</html>

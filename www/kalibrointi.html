@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Ruuvi sensors</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-group">
+            <form action="/kalibrointi" method="get">
+                <div class="container text-center">
+                    <div class="col-sm-6 text-left">
+                        <label for="name">Kulma:</label>
+                        <input type="text" class="form-control" id="kulma1" name="kulma1" value="0">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">SG:</label>
+                        <input type="text" class="form-control" id="sg1" name="sg1" value="1">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">Kulma:</label>
+                        <input type="text" class="form-control" id="kulma2" name="kulma2" value="0">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">SG:</label>
+                        <input type="text" class="form-control" id="sg2" name="sg2" value="1">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">Kulma:</label>
+                        <input type="text" class="form-control" id="kulma3" name="kulma3" value="0">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">SG:</label>
+                        <input type="text" class="form-control" id="sg3" name="sg3" value="1">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">Kulma:</label>
+                        <input type="text" class="form-control" id="kulma4" name="kulma4" value="0">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <label for="name">SG:</label>
+                        <input type="text" class="form-control" id="sg4" name="sg4" value="1">
+                    </div>
+                    <div class="col-sm-6 text-left">
+                            <label for="name">OG:</label>
+                            <input type="text" class="form-control" id="og" name="og" value="1">
+                        </div>
+                    <button type="submit" id="setName" class="btn btn-primary">Tallenna</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+        const getData = () => {
+            fetch('./data')
+                .then((res) => {
+                    res.json()
+                        .then(function (data) {
+                            console.log(data);
+                            document.getElementById("kulma1").value = data.calibration[0].kulma;
+                            document.getElementById("kulma2").value = data.calibration[1].kulma;
+                            document.getElementById("kulma3").value = data.calibration[2].kulma;
+                            document.getElementById("kulma4").value = data.calibration[3].kulma;
+
+                            document.getElementById("sg1").value = data.calibration[0].sg;
+                            document.getElementById("sg2").value = data.calibration[1].sg;
+                            document.getElementById("sg3").value = data.calibration[2].sg;
+                            document.getElementById("sg4").value = data.calibration[3].sg;
+                            document.getElementById("og").value = data.calibration[0].og;
+
+                        });
+                })
+        }
+        getData()
+    </script>
