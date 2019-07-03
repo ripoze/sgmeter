@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Ruuvi sensors</title>
+    <title>Kalibrointi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,14 +12,26 @@
 </head>
 
 <body>
-
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SG meter</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="form-group">
-            <form action="/kalibrointi" method="get">
+            <form action="/kalibrointi" method="post">
+                <div class="container text-center">
+                    <div class="col-sm-6 text-left">
+                        <label for="name">Nimi:</label>
+                        <input type="text" class="form-control" id="nimi" name="nimi" value="">
+                    </div>
+                </div>
                 <div class="container text-center">
                     <div class="col-sm-6 text-left">
                         <label for="name">Kulma:</label>
-                        <input type="text" class="form-control" id="kulma1" name="kulma1" value="0">
+                        <input type="text" class="form-control" id="kulma1" name="kulma1" value="1">
                     </div>
                     <div class="col-sm-6 text-left">
                         <label for="name">SG:</label>
@@ -50,9 +62,12 @@
                         <input type="text" class="form-control" id="sg4" name="sg4" value="1">
                     </div>
                     <div class="col-sm-6 text-left">
-                            <label for="name">OG:</label>
-                            <input type="text" class="form-control" id="og" name="og" value="1">
-                        </div>
+                        <label for="name">OG:</label>
+                        <input type="text" class="form-control" id="og" name="og" value="1">
+                    </div>
+                    <input type="hidden" id="mac" name="mac" value="{{id}}">
+                </div>
+                <div class="container text-center">
                     <button type="submit" id="setName" class="btn btn-primary">Tallenna</button>
                 </div>
             </form>
@@ -66,25 +81,29 @@
 </html>
 
 <script>
-        const getData = () => {
-            fetch('./data')
-                .then((res) => {
-                    res.json()
-                        .then(function (data) {
-                            console.log(data);
-                            document.getElementById("kulma1").value = data.calibration[0].kulma;
-                            document.getElementById("kulma2").value = data.calibration[1].kulma;
-                            document.getElementById("kulma3").value = data.calibration[2].kulma;
-                            document.getElementById("kulma4").value = data.calibration[3].kulma;
+    var sensorId = "{{id}}"
+    const getData = () => {
+        fetch('./data')
+            .then((res) => {
+                res.json()
+                    .then(function (data) {
+                        console.log(data);
+                        data = data.filter(s => s.id == sensorId)[0]
+                        document.getElementById("nimi").value = data.nimi || data.id;
 
-                            document.getElementById("sg1").value = data.calibration[0].sg;
-                            document.getElementById("sg2").value = data.calibration[1].sg;
-                            document.getElementById("sg3").value = data.calibration[2].sg;
-                            document.getElementById("sg4").value = data.calibration[3].sg;
-                            document.getElementById("og").value = data.calibration[0].og;
+                        document.getElementById("kulma1").value = data.calibration[0].kulma;
+                        document.getElementById("kulma2").value = data.calibration[1].kulma;
+                        document.getElementById("kulma3").value = data.calibration[2].kulma;
+                        document.getElementById("kulma4").value = data.calibration[3].kulma;
 
-                        });
-                })
-        }
-        getData()
-    </script>
+                        document.getElementById("sg1").value = data.calibration[0].sg;
+                        document.getElementById("sg2").value = data.calibration[1].sg;
+                        document.getElementById("sg3").value = data.calibration[2].sg;
+                        document.getElementById("sg4").value = data.calibration[3].sg;
+                        document.getElementById("og").value = data.calibration[0].og;
+
+                    });
+            })
+    }
+    getData()
+</script>

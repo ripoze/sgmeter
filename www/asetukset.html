@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Asetukset</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SG meter</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="form-group">
+            <form action="/asetukset" method="post">
+                <div class="container text-center">
+                    <div class="col-sm-12 text-left">
+                        <label for="name">1. vaihe. Uusien laitteden skannaus (ms):</label>
+                        <input type="text" class="form-control" id="scanTime" name="scanTime" value="{{scanTime}}">
+                    </div>
+
+                    <div class="col-sm-12 text-left">
+                        <label for="name">2. vaihe. Anturien luku (ms)</label>
+                        <input type="text" class="form-control" id="readTime" name="readTime" value="{{readTime}}">
+                    </div>
+                    <div class="col-sm-12 text-left">
+                        <label for="name">3. vaihe. Virransäästö (ms)</label>
+                        <input type="text" class="form-control" id="idleTime" name="idleTime" value="{{idleTime}}">
+                    </div>
+                    <div class="col-sm-12 text-left">
+                        <button type="submit" id="setName" class="btn btn-primary">Tallenna</button>
+                    </div>
+                    <div class="col-sm-12 text-left">
+                        <a href="/reset"><button id="setName" class="btn btn-primary">Tyhjennä anturidata</button></a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
